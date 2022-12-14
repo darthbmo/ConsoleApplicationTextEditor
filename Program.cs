@@ -1,4 +1,6 @@
-﻿Menu();
+﻿using System.Reflection;
+
+Menu();
 
 static void Menu()
 {
@@ -27,17 +29,52 @@ static void Menu()
             Console.WriteLine("Invalid Option! The program will be exited!");
             break;
     }
+
+    Console.WriteLine("Press any key to exit!");
+    
+    Console.ReadLine();
 }
 
 static void CreateTextFile(string? fileName)
 {
-    throw new NotImplementedException();
+    if(string.IsNullOrWhiteSpace(fileName))
+    {
+        throw new ArgumentException("File name is not valid!");
+    }
+
+    string? pathBase = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+
+    string? fullPath = Path.Combine(pathBase, fileName);
+
+    if(File.Exists(fullPath))
+    {
+        Console.WriteLine("File exists! You will choice other name to the file? Y = Yes or N = No");
+
+        char? choice = Convert.ToChar(Console.ReadLine());
+
+        if(choice == 'Y')
+        {
+             Console.WriteLine("What will be the file name?");
+             
+             CreateTextFile(Console.ReadLine());
+        }
+        else
+        {
+            Console.WriteLine("The program will be exited!");
+        }
+    }
+    else
+    {
+        File.Create(fullPath);
+
+        Console.WriteLine("File created successfully!");
+    }
 }
 
 static void OpenTextFile(string? fileName)
 {
     if(string.IsNullOrWhiteSpace(fileName))
     {
-        throw new ArgumentException("Option selected is not valid!");
+        throw new ArgumentException("File name is not valid!");
     }
 }
