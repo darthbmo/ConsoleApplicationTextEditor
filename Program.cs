@@ -50,9 +50,7 @@ static void CreateTextFile(string? fileName)
     {
         Console.WriteLine("File exists! You will choice other name to the file? Y = Yes or N = No");
 
-        char? choice = Convert.ToChar(Console.ReadLine().ToUpper());
-
-        if(choice == 'Y')
+        if(Convert.ToChar(Console.ReadLine().ToUpper()) == 'Y')
         {
              Console.WriteLine("What will be the file name?");
              
@@ -88,9 +86,7 @@ static async void OpenTextFile(string? fileName)
 
         Console.WriteLine("Do you want write to file? Y = Yes or N = No");
 
-        char? choice = Convert.ToChar(Console.ReadLine().ToUpper());
-
-        if(choice == 'Y')
+        if(Convert.ToChar(Console.ReadLine().ToUpper()) == 'Y')
         {
              Console.WriteLine("The file will be opening to write...");
              
